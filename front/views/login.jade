@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        form.form-horizontal(action="/login", method="POST")
+          fieldset
+            legend
+              h1 Login
+            .form-group
+              label.col-md-4.control-label(for='username') Username
+              .col-md-4
+                input#username.form-control.input-md(name='username', placeholder='angeleyes', required, type='text')
+            .form-group
+              label.col-md-4.control-label(for='password') Password
+              .col-md-4
+                input#password.form-control.input-md(name='password', placeholder='••••••••••••', required, type='password')
+            .form-group
+              .col-md-4.col-md-offset-4
+                button#signup.btn.btn-primary Sign in
+ 
