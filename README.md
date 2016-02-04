@@ -23,7 +23,7 @@ $ npm install
 $ npm start
 ```
 
-Server runs at http://localhost:3000/
+Server runs at `http://localhost:3000/`
 
 ## npm scripts
 
