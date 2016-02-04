@@ -123,6 +123,7 @@ models.sequelize.sync()
     app.listen(port);
     app.on('error', listeners.onError);
     app.on('listening', listeners.onListening);
+    console.log('Server running on port ' + port);
   });
 
 module.exports = app;
