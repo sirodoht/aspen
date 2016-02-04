@@ -40,6 +40,7 @@ $ npm start
 - [ ] Handle failed login properly
 - [ ] Validation
 - [ ] Security
+- [ ] Error handling
 
 ## License
 
