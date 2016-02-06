@@ -1,6 +1,4 @@
-# aspen
-
-[![Build Status](https://semaphoreci.com/api/v1/sirodoht/aspen/branches/master/badge.svg)](https://semaphoreci.com/sirodoht/aspen)
+# aspen [![Build Status](https://semaphoreci.com/api/v1/sirodoht/aspen/branches/master/badge.svg)](https://semaphoreci.com/sirodoht/aspen)
 
 > Yet another Node.js boilerplate
 
