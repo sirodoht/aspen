@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "bcrypt": "0.8.5",
-    "bluebird": "3.2.1",
-    "body-parser": "1.14.2",
+    "bluebird": "3.3.1",
+    "body-parser": "1.15.0",
     "bower": "1.7.7",
     "browserify": "13.0.0",
     "config": "1.19.0",
@@ -29,20 +29,20 @@
     "express": "4.13.4",
     "express-session": "1.13.0",
     "jade": "1.11.0",
-    "morgan": "1.6.1",
+    "morgan": "1.7.0",
     "node-sass": "3.4.2",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
-    "pg": "4.4.4",
+    "pg": "4.4.6",
     "pg-hstore": "2.3.2",
-    "sequelize": "3.19.1",
+    "sequelize": "3.19.3",
     "serve-favicon": "2.3.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
     "jshint": "2.9.1",
     "mocha": "2.4.5",
-    "nodemon": "1.8.1",
+    "nodemon": "1.9.0",
     "request": "2.69.0"
   }
 }
