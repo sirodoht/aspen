@@ -1,11 +1,10 @@
 {
   "name": "aspen",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "npm run watchify & npm run sasswatch & nodemon ./back/app.js",
-    "postinstall": "bower install",
-    "test": "jshint ./back/app.js && jshint ./front/scripts/app.js && mocha -b ./test/index.js",
+    "test": "eslint ./back/app.js && eslint ./front/scripts/app.js && mocha -b ./test/index.js",
     "browserify": "browserify front/scripts/app.js -o front/static/script.js",
     "watchify": "watchify front/scripts/app.js -v --poll 100ms -o ./front/static/script.js",
     "sass": "node-sass --include-path scss ./front/styles/boot.scss ./front/static/style.css",
@@ -18,31 +17,30 @@
     "npm": ">=3.3.x"
   },
   "dependencies": {
-    "bcrypt": "0.8.5",
-    "bluebird": "3.3.1",
-    "body-parser": "1.15.0",
-    "bower": "1.7.7",
-    "browserify": "13.0.0",
-    "config": "1.19.0",
-    "cookie-parser": "1.4.1",
+    "bcrypt": "0.8.7",
+    "bluebird": "3.4.1",
+    "body-parser": "1.15.2",
+    "browserify": "13.0.1",
+    "config": "1.21.0",
+    "cookie-parser": "1.4.3",
     "debug": "2.2.0",
-    "express": "4.13.4",
-    "express-session": "1.13.0",
-    "jade": "1.11.0",
+    "express": "4.14.0",
+    "express-session": "1.14.0",
     "morgan": "1.7.0",
-    "node-sass": "3.4.2",
+    "node-sass": "3.8.0",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
-    "pg": "4.4.6",
+    "pg": "6.0.1",
     "pg-hstore": "2.3.2",
-    "sequelize": "3.19.3",
+    "pug": "2.0.0-beta3",
+    "sequelize": "3.23.4",
     "serve-favicon": "2.3.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "jshint": "2.9.1",
-    "mocha": "2.4.5",
-    "nodemon": "1.9.0",
-    "request": "2.69.0"
+    "eslint": "3.0.0",
+    "mocha": "2.5.3",
+    "nodemon": "1.9.2",
+    "request": "2.72.0"
   }
 }
