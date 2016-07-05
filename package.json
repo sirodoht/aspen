@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "start": "npm run watchify & npm run sasswatch & nodemon ./back/app.js",
-    "postinstall": "bower install",
     "test": "jshint ./back/app.js && jshint ./front/scripts/app.js && mocha -b ./test/index.js",
     "browserify": "browserify front/scripts/app.js -o front/static/script.js",
     "watchify": "watchify front/scripts/app.js -v --poll 100ms -o ./front/static/script.js",
@@ -21,7 +20,6 @@
     "bcrypt": "0.8.5",
     "bluebird": "3.3.1",
     "body-parser": "1.15.0",
-    "bower": "1.7.7",
     "browserify": "13.0.0",
     "config": "1.19.0",
     "cookie-parser": "1.4.1",
