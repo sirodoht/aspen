@@ -1,13 +1,13 @@
-var Promise = require('bluebird');
-var Sequelize = require('sequelize');
-var bcrypt = require('bcrypt');
+const Promise = require('bluebird');
+const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
 Promise.promisifyAll(require('bcrypt'));
 
-var SALT_WORK_FACTOR = 10;
+const SALT_WORK_FACTOR = 10;
 
-module.exports = function(sequelize, DataTypes) {
-  var attributes = {
+module.exports = function (sequelize, DataTypes) {
+  const attributes = {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     name: DataTypes.STRING,
@@ -35,30 +35,30 @@ module.exports = function(sequelize, DataTypes) {
     location: DataTypes.STRING,
   };
 
-  var options = {};
+  const options = {};
   options.classMethods = {
-    associate: function(models) {
+    associate: function (models) {
       User.hasMany(models.Course);
     }
   };
   options.instanceMethods = {
-    validPassword: function(pwd) {
-      return bcrypt.compareAsync(pwd, this.password).then(function(isMatch) {
+    validPassword: function (pwd) {
+      return bcrypt.compareAsync(pwd, this.password).then(function (isMatch) {
         return isMatch;
-    	});
+      });
     },
   };
 
-  var User = sequelize.define('User', attributes, options);
+  const User = sequelize.define('User', attributes, options);
 
-  var hashPasswordHook = function(user) {
+  const hashPasswordHook = function (user) {
     return bcrypt.genSaltAsync(SALT_WORK_FACTOR)
-      .then(function(salt) {
-        return bcrypt.hashAsync(user.password, salt).then(function(hash) {
+      .then(function (salt) {
+        return bcrypt.hashAsync(user.password, salt).then(function (hash) {
           user.password = hash;
         });
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('Password hook error:', err);
       });
   };

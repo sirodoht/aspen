@@ -1,20 +1,20 @@
-var path = require('path');
-var config = require('config');
+const path = require('path');
+const config = require('config');
 
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
-var configPostgres = config.get('postgres');
-var sequelize = new Sequelize(configPostgres.database, configPostgres.uername, configPostgres.password, {
+const configPostgres = config.get('postgres');
+const sequelize = new Sequelize(configPostgres.database, configPostgres.uername, configPostgres.password, {
   host: configPostgres.host,
   dialect: 'postgres',
 });
 
-var user = sequelize.import(path.join(__dirname, 'user.model.js'));
+const user = sequelize.import(path.join(__dirname, 'user.model.js'));
 
-var db = {
+const db = {
   User: user,
-  sequelize: sequelize,
-  Sequelize: Sequelize,
+  sequelize,
+  Sequelize,
 };
 
 module.exports = db;
