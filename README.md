@@ -40,8 +40,6 @@ Server runs at `http://localhost:3000/`
 
 ## Todo
 
-- [ ] Testing
-  - [ ] Evaluate `tape` and `node-tap`
 - [ ] Move middleware out of `back/app.js`
 - [ ] Handle failed login properly
 - [ ] Validation
