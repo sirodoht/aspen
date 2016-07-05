@@ -44,30 +44,30 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
+  usernameField: 'username',
+  passwordField: 'password',
     // session: false,
-  }, function(username, password, done) {
-    models.User.findOne({
-      where: {
-        username: username
-      }
-    }).then(function(user) {
-      if (!user) {
-        return done(null, false, {
-          message: 'Incorrect username.'
-        });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: 'Incorrect password.'
-        });
-      }
-      return done(null, user);
-    }).catch(function (err) {
-      console.log('Passport error:', err);
-    });
-  }
+}, function(username, password, done) {
+  models.User.findOne({
+    where: {
+      username: username
+    }
+  }).then(function(user) {
+    if (!user) {
+      return done(null, false, {
+        message: 'Incorrect username.'
+      });
+    }
+    if (!user.validPassword(password)) {
+      return done(null, false, {
+        message: 'Incorrect password.'
+      });
+    }
+    return done(null, user);
+  }).catch(function (err) {
+    console.log('Passport error:', err);
+  });
+}
 ));
 
 passport.serializeUser(function(user, done) {
