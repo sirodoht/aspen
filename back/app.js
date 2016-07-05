@@ -77,7 +77,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (username, done) {
   models.User.findOne({
     where: {
-      username: username
+      username
     }
   }).then(function (user) {
     done(null, user);

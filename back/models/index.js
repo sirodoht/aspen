@@ -13,8 +13,8 @@ const user = sequelize.import(path.join(__dirname, 'user.model.js'));
 
 const db = {
   User: user,
-  sequelize: sequelize,
-  Sequelize: Sequelize,
+  sequelize,
+  Sequelize,
 };
 
 module.exports = db;
