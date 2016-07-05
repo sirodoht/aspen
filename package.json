@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm run watchify & npm run sasswatch & nodemon ./back/app.js",
-    "test": "jshint ./back/app.js && jshint ./front/scripts/app.js && mocha -b ./test/index.js",
+    "test": "eslint ./back/app.js && eslint ./front/scripts/app.js && mocha -b ./test/index.js",
     "browserify": "browserify front/scripts/app.js -o front/static/script.js",
     "watchify": "watchify front/scripts/app.js -v --poll 100ms -o ./front/static/script.js",
     "sass": "node-sass --include-path scss ./front/styles/boot.scss ./front/static/style.css",
