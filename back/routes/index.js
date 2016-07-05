@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var indexCtrl = require('../controllers/index.ctrl');
-var userCtrl = require('../controllers/user.ctrl');
+const indexCtrl = require('../controllers/index.ctrl');
+const userCtrl = require('../controllers/user.ctrl');
 
 router.post('/register', userCtrl.register);
 router.post('/login', userCtrl.login);
