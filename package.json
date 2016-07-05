@@ -38,7 +38,6 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "jshint": "2.9.2",
     "mocha": "2.5.3",
     "nodemon": "1.9.2",
     "request": "2.72.0"
