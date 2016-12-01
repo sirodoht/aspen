@@ -1,3 +1,7 @@
+/**
+ * @file User Sequelize model.
+ */
+
 const Promise = require('bluebird');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');

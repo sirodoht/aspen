@@ -1,3 +1,7 @@
+/**
+ * @file User views controller.
+ */
+
 const passport = require('passport');
 
 const models = require('../models');

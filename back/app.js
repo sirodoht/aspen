@@ -1,3 +1,11 @@
+/**
+ * aspen
+ * Node.js web application boilerplate.
+ *
+ * @author Theodore Keloglou
+ * @file Main application boot file.
+ */
+
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');

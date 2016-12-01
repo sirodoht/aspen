@@ -1,3 +1,7 @@
+/**
+ * @file Sequelize models and relations master file.
+ */
+
 const path = require('path');
 const config = require('config');
 
