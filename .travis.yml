@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "6.9.1"
 env:
-  - TRAVIS=travis CXX=g++-4.8
+  - NODE_ENV=travis CXX=g++-4.8
 
 services:
   - postgresql
