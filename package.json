@@ -3,14 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run watchify & npm run sasswatch & nodemon ./back/app.js",
+    "watch": "nodemon --watch back ./back/app.js",
     "test": "eslint ./back/app.js && eslint ./front/scripts/app.js && export NODE_CONFIG_DIR='../config' && ava",
-    "browserify": "browserify front/scripts/app.js -o front/static/script.js",
-    "watchify": "watchify front/scripts/app.js -v --poll 100ms -o ./front/static/script.js",
-    "sass": "node-sass --include-path scss ./front/styles/boot.scss ./front/static/style.css",
-    "sasswatch": "nodemon -e scss -x \"npm run sass\"",
-    "build": "npm run browserify && npm run sass",
-    "deploy": "npm run build && node ./back/app.js"
+    "build": "webpack --progress -p",
+    "start": "npm run build && node ./back/app.js"
   },
   "engines": {
     "node": "6.x",
@@ -34,7 +30,8 @@
     "pg-hstore": "2.3.2",
     "pug": "2.0.0-beta5",
     "sequelize": "3.24.1",
-    "serve-favicon": "2.3.0"
+    "serve-favicon": "2.3.0",
+    "webpack": "1.13.3"
   },
   "devDependencies": {
     "ava": "0.16.0",
