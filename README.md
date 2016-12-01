@@ -9,8 +9,8 @@
 * Express
 * Sequelize using PostgreSQL
 * Sass
-* Jade
-* Mocha
+* Pug
+* Ava
 * Chai
 * Passport
 * Browserify
