@@ -3,6 +3,7 @@ node_js:
     - "6.9.1"
 env:
     - NODE_ENV: "travis"
+    - "CXX=g++-4.8": true
 
 services:
     - postgresql
