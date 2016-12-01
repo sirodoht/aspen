@@ -8,12 +8,11 @@
 
 * Express
 * Sequelize using PostgreSQL
-* Sass
 * Pug
 * Ava
 * Chai
 * Passport
-* Browserify
+* yarn
 
 ## Run
 
@@ -25,15 +24,14 @@ $ npm install
 $ npm start
 ```
 
-Also tested with `[yarn](https://yarnpkg.com/)`.
+Also tested with [`yarn`](https://yarnpkg.com/).
 
 Server runs at `http://localhost:3000/`
 
 ## npm scripts
 
-* `npm start` Start Node server and watch JS and Sass files.
-* `npm test` Run jshint and tests.
-* `npm run build` Build front JS app and Sass styles.
+* `npm start` Start Node server.
+* `npm test` Run linting and tests.
 
 ## Todo
 
