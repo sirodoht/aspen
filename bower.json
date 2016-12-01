@@ -1,8 +1,0 @@
-{
-  "name": "aspen",
-  "version": "0.0.0",
-  "license": "MIT",
-  "dependencies": {
-    "bootstrap-sass": "3.3.6"
-  }
-}
