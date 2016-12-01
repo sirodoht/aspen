@@ -5,8 +5,7 @@
   "scripts": {
     "watch": "nodemon --watch back ./back/app.js",
     "test": "eslint ./back/app.js && eslint ./front/scripts/app.js && export NODE_CONFIG_DIR='../config' && ava",
-    "build": "webpack --progress -p",
-    "start": "npm run build && node ./back/app.js"
+    "start": "node ./back/app.js"
   },
   "engines": {
     "node": "6.x",
