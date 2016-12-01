@@ -10,6 +10,7 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const favicon = require('serve-favicon');
+const config = require('config');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -18,8 +19,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const routes = require('./routes/index');
 const models = require('./models');
-const helpers = require('./util/helpers');
-const listeners = require('./util/listeners');
 
 const app = express();
 
@@ -54,7 +53,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
-    // session: false,
+  // session: false,
 }, function (username, password, done) {
   models.User.findOne({
     where: {
@@ -123,15 +122,21 @@ app.use(function (err, req, res) {
   });
 });
 
-const port = helpers.normalizePort(process.env.PORT || '3000');
+let port = config.webserver.port;
+if (process.env.PORT) {
+  port = process.env.PORT;
+}
 app.set('port', port);
 
+// models.sequelize.sync({ force: true })
 models.sequelize.sync()
   .then(function () {
     app.listen(port);
-    app.on('error', listeners.onError);
-    app.on('listening', listeners.onListening);
-    console.log('Server running on port ' + port);
+    app.on('error', function (error) {
+      console.error('App error:', error);
+      process.exit(1);
+    });
+    console.log('Server running on port:', port);
   });
 
 module.exports = app;
