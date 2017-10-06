@@ -5,3 +5,8 @@ webserver:
 postgres:
   url: "postgres://sirodoht@127.0.0.1:5432/aspen"
 
+session:
+  maxAge: 86400000
+  overwrite: true
+  httpOnly: true
+  signed: true
