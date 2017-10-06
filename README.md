@@ -1,45 +1,34 @@
 # aspen
 
-> Yet another Node.js boilerplate
+> Yet another Node.js boilerplate based on Koa.js
 
 [![Build Status](https://travis-ci.org/sirodoht/aspen.svg?branch=master)](https://travis-ci.org/sirodoht/aspen)
 
+
 ## Stack
 
-* Express
-* Sequelize using PostgreSQL
-* Pug
-* Ava
-* Chai
-* Passport
-* yarn
+* Koa web framework
+* Passport authentication
+* Sequelize ORM using PostgreSQL
+* Pug view engine
+* Jest testing framework
 
-## Run
 
-Start PostgreSQL. Then:
+## Setup
 
+Create a db, user and password all `aspen`. See [here](https://gist.github.com/sirodoht/0666e232e1baf76f76bac43eb2600e2b)
+for a cheatsheet and [here](https://github.com/sirodoht/aspen/blob/master/config/default.yml#L5)
+for the credentials this app uses.
+
+Then:
 ```sh
-$ createdb aspen  # postgres tool for db creation via shell
 $ npm install
-$ npm start
+$ npm start  # or
+$ npm run watch  # reloads on save
 ```
 
-Also tested with [`yarn`](https://yarnpkg.com/).
+Server runs on localhost port 3000 [by default](https://github.com/sirodoht/aspen/blob/master/config/default.yml#L1)
 
-Server runs at `http://localhost:3000/`
-
-## npm scripts
-
-* `npm start` Start Node server.
-* `npm test` Run linting and tests.
-
-## Todo
-
-- [ ] Move middleware out of `back/app.js`
-- [ ] Handle failed login properly
-- [ ] Validation
-- [ ] Security
-- [ ] Error handling
 
 ## License
 
