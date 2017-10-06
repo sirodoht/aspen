@@ -1,0 +1,8 @@
+.navbar {
+  border-radius: 0;
+}
+
+.form-control,
+.form-control:focus {
+  box-shadow: none;
+}
