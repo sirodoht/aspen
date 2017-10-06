@@ -2,7 +2,7 @@ port: 3000
 sessionSecret: "thesearethewordsofthesecret"
 
 postgres:
-  url: "postgres://sirodoht@127.0.0.1:5432/aspen"
+  url: "postgres://aspen:aspen@127.0.0.1:5432/aspen"
 
 session:
   maxAge: 86400000
