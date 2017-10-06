@@ -20,8 +20,12 @@ html
             ul.nav.navbar-nav.navbar-right
               li
                 a(href="/register") Register
-              li
-                a(href="/login") Log in
+              if user
+                li
+                  a(href="/logout") Log out
+              else
+                li
+                  a(href="/login") Log in
     block content
     footer
       script(src="/js/jquery-1.12.4.min.js")
