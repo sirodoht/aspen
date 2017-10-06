@@ -18,7 +18,7 @@
 
 Create a db, user and password all `aspen`. See [here](https://gist.github.com/sirodoht/0666e232e1baf76f76bac43eb2600e2b)
 for a cheatsheet and [here](https://github.com/sirodoht/aspen/blob/master/config/default.yml#L5)
-for the credentials this app uses.
+for the local Postgres credentials.
 
 Then:
 ```sh
