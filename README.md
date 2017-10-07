@@ -1,8 +1,6 @@
-# aspen
+# aspen [![Build Status](https://travis-ci.org/sirodoht/aspen.svg?branch=master)](https://travis-ci.org/sirodoht/aspen)
 
 > Yet another Node.js boilerplate based on Koa.js
-
-[![Build Status](https://travis-ci.org/sirodoht/aspen.svg?branch=master)](https://travis-ci.org/sirodoht/aspen)
 
 
 ## Stack
