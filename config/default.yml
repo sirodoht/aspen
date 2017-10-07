@@ -1,7 +1,11 @@
-webserver:
-  port: 3000
-  sessionSecret: "these are the words of the secret"
+port: 3000
+sessionSecret: "thesearethewordsofthesecret"
 
 postgres:
-  url: "postgres://sirodoht@127.0.0.1:5432/aspen"
+  url: "postgres://aspen:aspen@127.0.0.1:5432/aspen"
 
+session:
+  maxAge: 86400000
+  overwrite: true
+  httpOnly: true
+  signed: true

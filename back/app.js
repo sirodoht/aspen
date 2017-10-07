@@ -6,137 +6,104 @@
  * @file Main application boot file.
  */
 
-const express = require('express');
-const logger = require('morgan');
 const path = require('path');
-const favicon = require('serve-favicon');
-const config = require('config');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const passport = require('passport');
+
+const Koa = require('koa');
+const views = require('koa-views');
+const logger = require('koa-logger');
+const bodyParser = require('koa-bodyparser');
+const cors = require('@koa/cors');
+const session = require('koa-session');
+const static = require('koa-static');
+const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
+const favicon = require('koa-favicon');
+const config = require('config');
+const Op = require('sequelize').Op;
 
-const routes = require('./routes/index');
-const models = require('./models');
+const models = require('./models/index');
+const router = require('./router');
 
-const app = express();
+const app = module.exports = new Koa();
 
-app.set('views', path.join(__dirname, '../front/views'));
-app.set('view engine', 'pug');
+app.use(logger());
 
-// Enable CORS
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
-app.use(favicon(path.join(__dirname, '../front/static', 'favicon.ico')));
-
-app.use(logger('dev'));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(cookieParser());
-
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
+app.use(views(path.join(__dirname, '../front/views'), {
+  extension: 'pug',
 }));
+
+app.use(bodyParser());
+
+app.keys = [config.sessionSecret];
+app.use(session(config.session, app));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy({
-  usernameField: 'username',
-  passwordField: 'password',
-  // session: false,
-}, function (username, password, done) {
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+  try {
+    const user = await models.User.findOne({
+      where: {
+        id: {
+          [Op.eq]: id,
+        },
+      },
+    });
+    done(null, user);
+  } catch(err) {
+    done(err);
+  }
+});
+
+passport.use(new LocalStrategy(function (username, password, done) {
   models.User.findOne({
     where: {
-      username: username
-    }
-  }).then(function (user) {
-    if (!user) {
-      return done(null, false, {
-        message: 'Incorrect username.'
-      });
-    }
-    if (!user.validPassword(password)) {
-      return done(null, false, {
-        message: 'Incorrect password.'
-      });
-    }
-    return done(null, user);
-  }).catch(function (err) {
-    console.log('Passport error:', err);
-  });
+      username: {
+        [Op.eq]: username,
+      },
+    },
+  })
+    .then((user) => {
+      if (!user) {
+        done(null, false, {
+          message: 'Incorrect username.'
+        });
+      }
+      if (!user.validPassword(password)) {
+        done(null, false, {
+          message: 'Incorrect password.'
+        });
+      }
+      done(null, user);
+    })
+    .catch((err) => {
+      console.log('Passport error:', err);
+      done(err);
+    });
 }
 ));
 
-passport.serializeUser(function (user, done) {
-  done(null, user.username);
-});
+app.use(cors());
 
-passport.deserializeUser(function (username, done) {
-  models.User.findOne({
-    where: {
-      username
-    }
-  }).then(function (user) {
-    done(null, user);
-  });
-});
+app.use(router.routes());
 
-app.use(express.static(path.join(__dirname, '../front/static')));
+app.use(static(path.join(__dirname, '../front/static')));
 
-app.use('/', routes);
+app.use(favicon(path.join(__dirname, '../front/static/favicon.ico')));
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// development error handler, will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function (err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler, no stacktraces leaked to user
-app.use(function (err, req, res) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
-let port = config.webserver.port;
-if (process.env.PORT) {
-  port = process.env.PORT;
-}
-app.set('port', port);
+const port = process.env.PORT || config.port;
 
 // models.sequelize.sync({ force: true })
 models.sequelize.sync()
-  .then(function () {
+  .then(() => {
     app.listen(port);
-    app.on('error', function (error) {
+    app.on('error', (error) => {
       console.error('App error:', error);
       process.exit(1);
     });
-    console.log('Server running on port:', port);
+    console.log(`Server running on port ${port}`);
   });
-
-module.exports = app;

@@ -2,59 +2,63 @@
  * @file User views controller.
  */
 
-const passport = require('passport');
+const passport = require('koa-passport');
+const Op = require('sequelize').Op;
 
-const models = require('../models');
+const models = require('../models/index');
+
 
 const userCtrl = module.exports = {};
 
-userCtrl.getUser = function (req, res) {
-  const userParam = req.params.user;
-
-  models.User.findOne({
+userCtrl.getUser = async function getUser(ctx) {
+  const user = await models.User.findOne({
     where: {
-      username: userParam,
-    }
-  }).then(function (user) {
-    if (user !== null) {
-      res.render('user', {
-        email: user.dataValues.email,
-        name: user.dataValues.name,
-        username: user.dataValues.username,
-      });
+      username: {
+        [Op.eq]: ctx.params.user,
+      },
+    },
+  });
+  if (user !== null) {
+    await ctx.render('user', {
+      email: user.dataValues.email,
+      name: user.dataValues.name,
+      username: user.dataValues.username,
+    });
+  } else {
+    ctx.status = 404;
+  }
+};
+
+userCtrl.getRegister = async function getRegister(ctx) {
+  await ctx.render('register');
+};
+
+userCtrl.register = async function register(ctx) {
+  await models.User.create({
+    username: ctx.request.body.username,
+    name: ctx.request.body.name,
+    email: ctx.request.body.email,
+    password: ctx.request.body.password,
+  });
+  ctx.redirect(`/${ctx.request.body.username}`);
+};
+
+userCtrl.getLogin = async function getLogin(ctx) {
+  await ctx.render('login');
+};
+
+userCtrl.login = async function login(ctx) {
+  return passport.authenticate('local', function(err, user) {
+    if (user === false) {
+      ctx.throw(401);
     } else {
-      res.sendStatus(404);
+      ctx.login(user);
+      ctx.redirect(`/${user.username}`);
     }
-  });
+  })(ctx);
 };
 
-userCtrl.getRegister = function (req, res) {
-  res.render('register');
-};
-
-userCtrl.register = function (req, res) {
-  models.User.create({
-    username: req.body.username,
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  }).then(function () {
-    res.redirect('/' + req.body.username);
-  });
-};
-
-userCtrl.getLogin = function (req, res) {
-  res.render('login');
-};
-
-userCtrl.login = function (req, res, next) {
-  passport.authenticate('local', function (err, user) {
-    res.redirect('/' + user.username);
-    if (err) {
-      next(err);
-    }
-    if (!user) {
-      res.redirect('/login');
-    }
-  })(req, res, next);
+userCtrl.logout = async function logout(ctx) {
+  ctx.logout();
+  ctx.redirect('/');
 };
