@@ -14,7 +14,7 @@ const logger = require('koa-logger');
 const bodyParser = require('koa-bodyparser');
 const cors = require('@koa/cors');
 const session = require('koa-session');
-const static = require('koa-static');
+const koaStatic = require('koa-static');
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
 const favicon = require('koa-favicon');
@@ -91,19 +91,6 @@ app.use(cors());
 
 app.use(router.routes());
 
-app.use(static(path.join(__dirname, '../front/static')));
+app.use(koaStatic(path.join(__dirname, '../front/static')));
 
 app.use(favicon(path.join(__dirname, '../front/static/favicon.ico')));
-
-const port = process.env.PORT || config.port;
-
-// models.sequelize.sync({ force: true })
-models.sequelize.sync()
-  .then(() => {
-    app.listen(port);
-    app.on('error', (error) => {
-      console.error('App error:', error);
-      process.exit(1);
-    });
-    console.log(`Server running on port ${port}`);
-  });
