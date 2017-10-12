@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "watch": "nodemon --watch back ./back/app.js",
-    "test": "eslint ./back/app.js",
-    "start": "node ./back/app.js"
+    "watch": "nodemon --watch back ./back/init.js",
+    "test": "eslint ./back/init.js && jest --forceExit",
+    "start": "node ./back/init.js"
   },
   "engines": {
     "node": "6.x",
