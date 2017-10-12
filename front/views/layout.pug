@@ -18,12 +18,12 @@ html
             a.navbar-brand(href="/") aspen
           .navbar-collapse.collapse
             ul.nav.navbar-nav.navbar-right
-              li
-                a(href="/register") Register
               if user
                 li
                   a(href="/logout") Log out
               else
+                li
+                  a(href="/register") Register
                 li
                   a(href="/login") Log in
     block content
