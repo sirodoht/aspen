@@ -34,6 +34,12 @@
   },
   "devDependencies": {
     "eslint": "4.8.0",
-    "nodemon": "1.12.1"
+    "jest": "21.2.1",
+    "nodemon": "1.12.1",
+    "supertest": "3.0.0"
+  },
+  "jest": {
+    "bail": true,
+    "verbose": true
   }
 }
